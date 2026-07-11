@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Chavruta Learning"
+  short_description: "Adaptive Socratic study partner with calibrated friction."
+  default_prompt: "Use $ai-chavruta-learning to help me study this topic through adaptive questions, repair, transfer practice, and mistake-based flashcards."
