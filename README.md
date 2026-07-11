@@ -1,5 +1,7 @@
 # AI Chavruta Learning Skill
 
+[English](README.md) | [简体中文](README.zh-CN.md)
+
 An adaptive Codex skill that turns the assistant into a Socratic learning partner: it asks calibrated questions, challenges vague answers, gives minimal hints, repairs mistakes, tests transfer, and extracts only mistake-based flashcards.
 
 ## What It Does
@@ -41,6 +43,9 @@ ai-chavruta-learning-skill/
     agents/
       openai.yaml
   README.md
+  README.zh-CN.md
+  USAGE.md
+  examples/
   LICENSE
   .gitignore
 ```
