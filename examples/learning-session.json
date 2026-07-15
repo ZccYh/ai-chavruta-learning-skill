@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "session_id": "example-entropy-001",
+  "started_at": "2026-01-01T10:00:00+08:00",
+  "ended_at": "2026-01-01T10:20:00+08:00",
+  "topic": "entropy",
+  "goal": "understanding",
+  "mode": "science-math-stress-test",
+  "learner_state": "first-exposure",
+  "source_ref": "illustrative example",
+  "items": [
+    {
+      "item_id": "q1",
+      "skill_level": "distinction",
+      "prompt": "Why is entropy = disorder an incomplete definition?",
+      "initial_response": "Entropy measures how disordered a system is.",
+      "confidence_1_to_5": 4,
+      "correctness_0_to_2": 1,
+      "reasoning_0_to_2": 0,
+      "error_type": "oversimplification",
+      "hint_level": 1,
+      "revised_response": "Disorder is an intuition; entropy is related to the number of accessible microstates.",
+      "repaired": true,
+      "transfer_checked": true,
+      "transfer_correct": true
+    }
+  ],
+  "summary": {
+    "mastered": [
+      "Entropy should not be reduced to the word disorder."
+    ],
+    "unstable": [
+      "Formal relation between entropy and microstate count."
+    ],
+    "misunderstood": [],
+    "overload_interventions": 0,
+    "next_session": [
+      "Apply the concept to a mixing example."
+    ]
+  },
+  "cards": [
+    {
+      "card_id": "c1",
+      "front": "Why is entropy = disorder an incomplete definition?",
+      "back": "Entropy is a thermodynamic and statistical quantity related to accessible microstates; disorder is only an intuition.",
+      "tags": [
+        "ai-chavruta",
+        "physics::thermodynamics",
+        "error::oversimplification"
+      ],
+      "source_item_id": "q1"
+    }
+  ]
+}

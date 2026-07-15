@@ -2,7 +2,7 @@
 
 [English](README.md) | 简体中文
 
-一个面向 Codex 的自适应学习 Skill。它把 AI 从“替你总结答案的助手”变成一位苏格拉底式学习伙伴：先提问诊断，再根据你的回答调整难度，通过追问、最小提示、纠错和迁移练习，帮助你真正掌握知识。
+一个基于开放 [Agent Skills 规范](https://agentskills.io/specification)的通用自适应学习 Skill。它不绑定单一模型或客户端，可以把兼容的 AI Agent 从“替你总结答案的助手”变成苏格拉底式学习伙伴：先提问诊断，再根据回答调整难度，通过追问、最小提示、纠错和迁移练习帮助学习者真正掌握知识。
 
 ## 它能做什么
 
@@ -13,25 +13,30 @@
 - 支持论文阅读、理科压力测试、人文辩论、语言学习和考试训练。
 - 只从真实错误和薄弱点中提取原子化复习卡片，可用于 Anki 或 RemNote。
 - 对长文档进行分段学习，并在各段之间建立概念联系。
+- 按需导出 Anki 可导入的 TSV，以及 JSON/JSONL 学习记录。
+- 在客户端具备本地访问能力时，可选通过 AnkiConnect 导入已确认的卡片。
 
-## 安装到 Codex
+## 安装
 
-将仓库中的 `ai-chavruta-learning` 文件夹复制到 Codex 的 skills 目录：
-
-```text
-~/.codex/skills/ai-chavruta-learning
-```
-
-Windows 通常对应：
+`ai-chavruta-learning/` 是通用 Skill 包。跨客户端推荐放到项目级或用户级 Agent Skills 目录：
 
 ```text
-%USERPROFILE%\.codex\skills\ai-chavruta-learning
+<项目目录>/.agents/skills/ai-chavruta-learning
+~/.agents/skills/ai-chavruta-learning
 ```
 
-安装后，新建一个 Codex 对话并输入：
+目前 [Codex](https://learn.chatgpt.com/docs/build-skills)、[GitHub Copilot](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills) 和 [Gemini CLI](https://codelabs.developers.google.com/gemini-cli/how-to-create-agent-skills-for-gemini-cli) 的相关工作流支持 `.agents/skills`。[Claude 系列产品](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview)也能使用同一个 Skill 包，但需要通过 Claude Code、claude.ai 设置或 API 的自定义 Skill 流程安装。各产品也可能支持自己的专用目录。
+
+不同客户端的显式调用语法不同。在 Codex 中可以输入：
 
 ```text
 使用 $ai-chavruta-learning 帮我学习[主题或材料]。
+```
+
+如果客户端没有 `$skill-name` 语法，直接自然语言说明：
+
+```text
+使用 AI Chavruta Learning Skill 帮我学习[主题或材料]。
 ```
 
 ## 最短使用方式
@@ -71,18 +76,26 @@ ai-chavruta-learning-skill/
     SKILL.md
     agents/
       openai.yaml
+    references/
+      exports-and-integrations.md
+    scripts/
+      anki_connect.py
   examples/
   README.md
   README.zh-CN.md
+  PROJECT-MAP.zh-CN.md
   USAGE.md
   LICENSE
 ```
 
-`ai-chavruta-learning/` 是可直接安装的 Skill 文件夹；仓库根目录中的文档和案例用于 GitHub 发布与学习参考。
+`SKILL.md` 是与厂商无关的学习协议；`agents/openai.yaml` 只是可选的 OpenAI 界面适配，其他客户端可以忽略。仓库根目录中的文档和案例用于发布与学习参考。
 
 ## 使用指南与实战案例
 
+- 查看 [项目复盘信息图](PROJECT-MAP.zh-CN.md)，快速理解项目演进、学习闭环、自适应机制和文件结构。
 - 阅读 [实战用户指南](USAGE.md)，了解完整流程、提示词模板、常见问题和一周训练方案。
+- 查看 [AnkiConnect 导入示例](examples/anki-import-payload.json)，了解可选的本地直连数据格式。
+- 查看 [学习 Session JSON 示例](examples/learning-session.json)，了解可移植的学习数据结构。
 - 查看 [论文阅读案例](examples/paper-reading.md)。
 - 查看 [理科压力测试案例](examples/science-stress-test.md)。
 - 查看 [人文辩论案例](examples/humanities-debate.md)。

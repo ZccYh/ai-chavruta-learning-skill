@@ -1,0 +1,17 @@
+{
+  "deckName": "AI Chavruta",
+  "modelName": "Basic",
+  "notes": [
+    {
+      "fields": {
+        "Front": "Why is entropy = disorder an incomplete definition?",
+        "Back": "Entropy is a thermodynamic and statistical quantity related to accessible microstates; disorder is only an intuition and can fail at boundary cases."
+      },
+      "tags": [
+        "ai-chavruta",
+        "physics::thermodynamics",
+        "error::oversimplification"
+      ]
+    }
+  ]
+}

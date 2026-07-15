@@ -1,6 +1,6 @@
 ---
 name: ai-chavruta-learning
-description: Turn Codex into an adaptive AI Chavruta learning partner for Socratic questioning, diagnostic drills, conceptual debate, exam preparation, transfer practice, and mistake-based flashcard extraction. Use when the user wants to study a topic, document, paper, lecture note, problem set, language item, or exam area through retrieval practice, calibrated cognitive friction, feedback, repair, and spaced-review outputs instead of passive summaries.
+description: Turn an AI agent into an adaptive Chavruta learning partner for Socratic questioning, diagnostic drills, conceptual debate, exam preparation, transfer practice, structured learning-data export, and mistake-based flashcard extraction. Use when the user wants to study a topic, document, paper, lecture note, problem set, language item, or exam area through retrieval practice, calibrated cognitive friction, feedback, repair, transfer, and spaced review instead of passive summaries.
 ---
 
 # AI Chavruta Learning
@@ -20,6 +20,16 @@ Default sequence:
 7. Convert only unstable or wrong points into flashcards.
 
 Do not begin with a full summary unless the learner explicitly asks for direct explanation.
+
+## Portability
+
+Keep the core learning workflow independent of any model vendor, client, operating system, or tool syntax.
+
+- Do not assume a particular invocation marker such as `$` or `@`.
+- Do not require filesystem, shell, network, or code-execution access for ordinary learning sessions.
+- Use plain conversation output when the host cannot create files or call tools.
+- Treat client-specific metadata, tools, and integrations as optional adapters.
+- Before writing files or calling a local service, confirm that the host supports it and that the learner wants the action.
 
 ## Session Setup
 
@@ -398,47 +408,7 @@ A: Entropy is a thermodynamic/statistical quantity related to the number of acce
 Tags: physics::thermodynamics, error::oversimplification
 ```
 
-Bad:
-
-```text
-Q: What is liberalism?
-A: A political theory about freedom.
-```
-
-Better:
-
-```text
-Q: What boundary often separates liberalism from republicanism in theories of freedom?
-A: Liberalism often emphasizes non-interference or individual rights, while republicanism emphasizes non-domination and civic conditions of freedom.
-Tags: political-philosophy::freedom, distinction
-```
-
-Bad:
-
-```text
-Q: What does exposure mean?
-A: exposure = access
-```
-
-Better:
-
-```text
-Q: In academic English, what is the difference between exposure to information and access to information?
-A: Access means the possibility of obtaining information; exposure means actually encountering or being subjected to it.
-Tags: english::word-distinction
-```
-
-Export formats:
-
-```text
-Front	Back	Tags
-[question]	[answer]	[tag1 tag2 tag3]
-```
-
-```text
-- [Question] >> [Answer]
-  - Tags:: [topic], [error type]
-```
+When the learner asks for Anki cards, RemNote output, a session JSON record, analytics-ready data, or direct Anki import, read [references/exports-and-integrations.md](references/exports-and-integrations.md) and follow the relevant capability level. Preview cards before any direct write.
 
 ## Session Report
 
@@ -471,6 +441,8 @@ Next Session:
 ```
 
 Keep the report short. Include learning-relevant patterns, not every question.
+
+Do not emit detailed learning logs by default. When the learner asks to export or track progress, use the portable session schema in [references/exports-and-integrations.md](references/exports-and-integrations.md). Minimize personal data and omit raw source text unless the learner explicitly requests it.
 
 ## Emergency Protocols
 

@@ -1,14 +1,22 @@
 # AI Chavruta Learning: 实战用户指南
 
-这份指南面向真实使用者，而不是开发者。目标是帮你把 `$ai-chavruta-learning` 用成一个主动学习伙伴：它不会一上来替你总结，而是先让你检索、区分、犯错、修正、迁移，最后只把真正不稳的点变成复习卡片。
+这份指南面向真实使用者，而不是开发者。目标是把 AI Chavruta Learning Skill 用成一个主动学习伙伴：它不会一上来替你总结，而是先让你检索、区分、犯错、修正、迁移，最后只把真正不稳的点变成复习卡片。核心 Skill 不绑定 Codex、Claude、Copilot、Gemini 或其他特定客户端。
 
 ## 1. 最短启动方式
 
-新开一个 Codex 对话，输入：
+在支持 Agent Skills 的客户端中新开对话。Codex 可以输入：
 
 ```text
 Use $ai-chavruta-learning to help me study [topic/material].
 ```
+
+其他客户端可以选择该 Skill，或直接输入：
+
+```text
+Use the AI Chavruta Learning skill to help me study [topic/material].
+```
+
+后续示例沿用 Codex 的 `$ai-chavruta-learning` 写法；如果你的客户端使用 `@`、技能选择器或自然语言调用，替换开头即可，学习参数不变。
 
 更好的启动方式：
 
@@ -132,6 +140,16 @@ Prefer Q/A cards for counterexamples and reasoning traps.
 Export in Anki tab-separated format.
 ```
 
+同时保存学习过程时：
+
+```text
+After the session, export:
+1. Anki-ready UTF-8 TSV containing only my weak points.
+2. A structured learning-session JSON record.
+Do not include the full source text or sensitive personal information.
+Preview both before writing files or importing anything.
+```
+
 ## 5. 几波实战测试摘要
 
 下面这些测试是为了检查 skill 是否真的执行“先检索、再解释、再修复、再迁移”的学习协议。
@@ -218,7 +236,12 @@ Export in Anki tab-separated format.
 
 ### Anki
 
-适合长期复习。推荐只导入这些卡：
+适合长期复习。Skill 提供两个层级：
+
+1. 默认导出 UTF-8 TSV，再从 Anki 的“文件 → 导入”载入，不需要插件。
+2. 本机安装 AnkiConnect 且客户端能访问本地服务时，可在预览确认后直接写入 Anki。
+
+推荐只导入这些卡：
 
 - 你答错过的点。
 - 你混淆过的概念。
@@ -226,6 +249,14 @@ Export in Anki tab-separated format.
 - 反例和边界条件。
 
 不要导入“看起来很完整但你没有犯过错”的卡片。
+
+直接导入示例：
+
+```text
+Preview at most 8 mistake-based cards. After I approve them, check my local AnkiConnect service, validate the deck and note type, reject duplicates, and import the approved cards. If direct import fails, give me a UTF-8 TSV fallback.
+```
+
+直接导入属于本机写操作，应该先展示目标牌组、笔记类型、字段、标签和完整卡片预览，再征求确认。
 
 ### RemNote
 
@@ -235,6 +266,16 @@ Export in Anki tab-separated format.
 - [Question] >> [Answer]
   - Tags:: [topic], [error type]
 ```
+
+### 学习数据
+
+如果想做长期复盘或学习看板，可以要求导出 Session JSON 或 JSONL：
+
+```text
+Export this session as structured JSON. Include item-level scores, confidence, error type, hint level, repair result, transfer result, summary, cards, and next-session actions. Use null for data that was not collected. Do not infer missing values.
+```
+
+这些记录可以进一步计算错误修复率、迁移正确率、信心校准差、过载干预率和 Session 完成率。它们反映的是学习过程；要证明长期记忆，还需要在之后安排延迟回忆测试。
 
 ## 7. 使用技巧
 
